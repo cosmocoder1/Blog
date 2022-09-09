@@ -5,3 +5,7 @@ body {
   margin: auto;
   font-family: Arial;
 }
+
+p {
+  line-height: 1.5;
+}
