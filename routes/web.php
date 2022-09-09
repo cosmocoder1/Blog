@@ -18,11 +18,16 @@ Route::get('/', function () {
 });
 
 Route::get('posts/{post}', function($slug) {
+
     $path = __DIR__ . "/../resources/posts/{$slug}.html";
 
     if (! file_exists($path)) {
         return redirect('/');
     };
+
+    $post = cache()->remember("posts.{$slug}", now()->addDays(7), function () use ($path) {
+      return file_get_contents($path);
+    });
 
     $post = file_get_contents($path);
 
